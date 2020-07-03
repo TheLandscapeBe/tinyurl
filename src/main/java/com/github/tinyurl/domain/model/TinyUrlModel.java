@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * 短网址模型
  *
- * @author jiquanxi
+ * @author errorfatal89@gmail.com
  * @date 2020/07/02
  */
 @Data

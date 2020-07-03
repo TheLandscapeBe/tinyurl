@@ -2,10 +2,12 @@ package com.github.tinyurl.domain.request;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotEmpty;
+
 /**
  * 生成短连接请求
  *
- * @author jiquanxi
+ * @author errorfatal89@gmail.com
  * @date 2020/07/02
  */
 @Data
@@ -14,6 +16,7 @@ public class GenerateRequest {
     /**
      * 原始URL
      */
+    @NotEmpty(message = "原始URL不能为空")
     private String url;
 
     /**
@@ -35,4 +38,9 @@ public class GenerateRequest {
      * 重定向状态码建议使用302，默认为302
      */
     private Integer httpStatusCode = 302;
+
+    /**
+     * 应用程序期望使用的域名
+     */
+    private String domain;
 }

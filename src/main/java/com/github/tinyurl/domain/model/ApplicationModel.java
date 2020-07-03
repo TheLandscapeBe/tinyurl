@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 /**
  * 请求APP来源
  *
- * @author jiquanxi
+ * @author errorfatal89@gmail.com
  * @date 2020/07/02
  */
 @Data

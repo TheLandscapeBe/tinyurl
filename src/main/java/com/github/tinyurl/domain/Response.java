@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * 响应基类
  *
- * @author jiquanxi
+ * @author errorfatal89@gmail.com
  * @date 2020/07/02
  */
 @Data
