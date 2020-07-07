@@ -25,9 +25,6 @@ import java.util.Map;
  */
 @Controller("/")
 public class TinyUrlController {
-
-    public static final char AMPERSAND = '&';
-    public static final char QUESTION_MARK = '?';
     @Resource
     private HttpServletRequest request;
 
@@ -70,11 +67,10 @@ public class TinyUrlController {
                     for (String value : values) {
                         finalUrl.append(AMPERSAND).append(key).append('=').append(value);
                     }
-
                 }
             });
         }
 
-        return "redirect:" + finalUrl;
+        return "redirect:" + finalUrl.toString();
     }
 }

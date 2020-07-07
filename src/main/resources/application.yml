@@ -2,3 +2,5 @@ spring:
   profiles:
     active: mysql
 
+tinyurl:
+  checkSign: false
