@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.2.175:3306/tiny_urldb?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    username: root
+    password: Pxjy2020.
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      connection-test-query: SELECT 1 FROM DUAL
+      connection-timeout: 30000
+      maximum-pool-size: 20
+      max-lifetime: 1800000
+      minimum-idle: 5
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+
+

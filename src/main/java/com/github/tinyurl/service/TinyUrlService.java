@@ -14,7 +14,14 @@ public interface TinyUrlService {
     /**
      * 生成短连接
      * @param generateRequest 生成请求
-     * @return 短连接响应
+     * @return 短连接响应字符串
      */
-    GenerateResponse generate(GenerateRequest generateRequest);
+    String generate(GenerateRequest generateRequest);
+
+    /**
+     * 获取重定向URL
+     * @param key 进制编码字符串
+     * @return 重定向链接地址
+     */
+    String getRedirectUrl(String key);
 }

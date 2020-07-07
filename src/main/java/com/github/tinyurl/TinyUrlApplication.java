@@ -1,7 +1,13 @@
 package com.github.tinyurl;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
+import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
+import org.springframework.boot.autoconfigure.data.redis.RedisRepositoriesAutoConfiguration;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -12,8 +18,12 @@ import org.springframework.context.annotation.ComponentScan;
  * @author errorfatal@gmail.com
  * @date 2020.07.02
  */
-@SpringBootApplication
+@SpringBootApplication(exclude={MongoAutoConfiguration.class,
+		MongoDataAutoConfiguration.class,
+		RedisAutoConfiguration.class,
+		RedisRepositoriesAutoConfiguration.class})
 @ComponentScan("com.github")
+@MapperScan("com.github")
 public class TinyUrlApplication {
 
 	public static void main(String[] args) {

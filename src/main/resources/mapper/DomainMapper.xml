@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.tinyurl.dao.DomainDao">
+
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="urlModel">
+        INSERT INTO `url`
+        (
+        
+        )
+        VALUES
+        (
+        
+        )
+    </insert>
+    
+    <select id="selectByDomain" resultType="Integer">
+        SELECT `ID` FROM `DOMAIN` WHERE DOMAIN=#{_parameter}
+    </select>
+</mapper>
