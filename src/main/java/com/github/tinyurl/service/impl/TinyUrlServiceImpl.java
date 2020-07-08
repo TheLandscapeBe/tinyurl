@@ -3,7 +3,7 @@ package com.github.tinyurl.service.impl;
 import com.github.tinyurl.constant.ErrorCode;
 import com.github.tinyurl.dao.DomainDao;
 import com.github.tinyurl.dao.UrlDao;
-import com.github.tinyurl.domain.model.TinyUrlModel;
+import com.github.tinyurl.domain.model.UrlModel;
 import com.github.tinyurl.domain.request.GenerateRequest;
 import com.github.tinyurl.exception.TinyUrlException;
 import com.github.tinyurl.service.TinyUrlService;
@@ -45,7 +45,7 @@ public class TinyUrlServiceImpl implements TinyUrlService {
         }
 
         // 插入记录到数据库
-        TinyUrlModel tinyUrlModel = new TinyUrlModel();
+        UrlModel tinyUrlModel = new UrlModel();
         tinyUrlModel.setCreateTime(new Date());
         if (StringUtils.isNotEmpty(request.getExpireDate())) {
             tinyUrlModel.setExpireTime(DateUtil.parse(request.getExpireDate()));
@@ -61,7 +61,7 @@ public class TinyUrlServiceImpl implements TinyUrlService {
     @Override
     public String getRedirectUrl(String key) {
         long number = decode(key);
-        TinyUrlModel tinyUrlModel = urlDao.selectById(number);
+        UrlModel tinyUrlModel = urlDao.selectById(number);
         if (ObjectUtil.isNull(tinyUrlModel)) {
             throw new TinyUrlException(ErrorCode.RECORD_NOT_EXISTS);
         }

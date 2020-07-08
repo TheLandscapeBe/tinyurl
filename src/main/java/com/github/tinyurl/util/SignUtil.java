@@ -1,6 +1,7 @@
 package com.github.tinyurl.util;
 
 import com.github.tinyurl.constant.Constants;
+import org.apache.commons.codec.digest.DigestUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
@@ -35,12 +36,15 @@ public class SignUtil {
             treeMap.put(key, value);
         }
 
-        treeMap.remove(SIGN_KEY);
+        String requestSign = treeMap.remove(SIGN_KEY);
 
         StringBuilder paramString = new StringBuilder();
         treeMap.forEach((key, value) -> {
             paramString.append(key).append(Constants.AMPERSAND);
         });
         paramString.append(ACCESS_KEY).append(Constants.AMPERSAND).append(accessKey);
+
+        String sign = DigestUtils.md5Hex(paramString.toString());
+        return sign.equals(requestSign);
     }
 }

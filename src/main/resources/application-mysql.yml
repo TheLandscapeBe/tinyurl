@@ -15,4 +15,6 @@ spring:
       ddl-auto: create-drop
     show-sql: true
 
-
+mybatis:
+  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml

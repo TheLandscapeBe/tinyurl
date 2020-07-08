@@ -23,7 +23,7 @@ import org.springframework.context.annotation.ComponentScan;
 		RedisAutoConfiguration.class,
 		RedisRepositoriesAutoConfiguration.class})
 @ComponentScan("com.github")
-@MapperScan("com.github")
+@MapperScan(value = "com.github.tinyurl.dao")
 public class TinyUrlApplication {
 
 	public static void main(String[] args) {

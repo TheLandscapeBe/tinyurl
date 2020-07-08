@@ -1,16 +1,15 @@
 package com.github.tinyurl.controller;
 
+import com.github.tinyurl.constant.Constants;
 import com.github.tinyurl.domain.Response;
 import com.github.tinyurl.domain.request.GenerateRequest;
 import com.github.tinyurl.service.TinyUrlService;
 import com.github.tinyurl.util.ArrayUtil;
 import com.github.tinyurl.util.MapUtil;
-import com.github.tinyurl.util.StringUtils;
-import io.netty.util.internal.StringUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +35,7 @@ public class TinyUrlController {
      * @param generateRequest 生成短连接请求
      * @return 短连接
      */
-    @GetMapping("/generate")
+    @PostMapping("/generate")
     public Response generate(@Valid GenerateRequest generateRequest) {
         String tinyUrl = tinyUrlService.generate(generateRequest);
         return Response.success(tinyUrl);
@@ -51,21 +50,21 @@ public class TinyUrlController {
         // 处理短连接中携带参数场景
         String orgUrl = tinyUrlService.getRedirectUrl(param);
         StringBuilder finalUrl = new StringBuilder(orgUrl);
-        if (finalUrl.charAt(finalUrl.length() - 1) == AMPERSAND) {
+        if (finalUrl.charAt(finalUrl.length() - 1) == Constants.AMPERSAND) {
             finalUrl.deleteCharAt(finalUrl.length() - 1);
         }
         
         Map<String, String[]> parameterMap =request.getParameterMap();
         if (MapUtil.isNotEmpty(parameterMap)) {
-            int index = orgUrl.indexOf(QUESTION_MARK);
+            int index = orgUrl.indexOf(Constants.QUESTION_MARK);
             if (index != -1) {
-                finalUrl.append(QUESTION_MARK);
+                finalUrl.append(Constants.QUESTION_MARK);
             }
 
             parameterMap.forEach((key, values) -> {
                 if (ArrayUtil.isNotEmpty(values)) {
                     for (String value : values) {
-                        finalUrl.append(AMPERSAND).append(key).append('=').append(value);
+                        finalUrl.append(Constants.AMPERSAND).append(key).append('=').append(value);
                     }
                 }
             });

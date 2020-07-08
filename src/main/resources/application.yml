@@ -2,5 +2,8 @@ spring:
   profiles:
     active: mysql
 
+server:
+  port: 8080
+
 tinyurl:
   checkSign: false

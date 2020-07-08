@@ -5,11 +5,11 @@
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="urlModel">
         INSERT INTO `url`
         (
-        
+            ``
         )
         VALUES
         (
-        
+
         )
     </insert>
     

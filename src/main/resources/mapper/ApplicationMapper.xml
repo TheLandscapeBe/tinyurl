@@ -2,4 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.github.tinyurl.dao.ApplicationDao">
 
+    <!-- 根据APPID查询应用信息 -->
+    <select id="selectByAppId" resultType="applicationModel">
+        SELECT * FROM `APPLICATION` WHERE `APP_ID`=#{_parameter}
+    </select>
+
 </mapper>

@@ -1,6 +1,6 @@
 package com.github.tinyurl.dao;
 
-import com.github.tinyurl.domain.model.TinyUrlModel;
+import com.github.tinyurl.domain.model.UrlModel;
 
 /**
  * Url DAO
@@ -14,12 +14,12 @@ public interface UrlDao {
      * @param urlModel
      * @return
      */
-    void insert(TinyUrlModel urlModel);
+    void insert(UrlModel urlModel);
 
     /**
      * 根据ID查询域名记录
      * @param id 主键ID
      * @return 域名记录
      */
-    TinyUrlModel selectById(Long id);
+    UrlModel selectById(Long id);
 }
