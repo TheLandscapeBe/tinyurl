@@ -3,7 +3,7 @@
 <mapper namespace="com.github.tinyurl.dao.DomainDao">
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="urlModel">
-        INSERT INTO `url`
+        INSERT INTO `domain`
         (
             ``
         )
@@ -14,6 +14,6 @@
     </insert>
     
     <select id="selectByDomain" resultType="Integer">
-        SELECT `ID` FROM `DOMAIN` WHERE DOMAIN=#{_parameter}
+        SELECT `ID` FROM `domain` WHERE DOMAIN=#{_parameter}
     </select>
 </mapper>

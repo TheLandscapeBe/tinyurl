@@ -4,7 +4,7 @@
 
     <!-- 根据APPID查询应用信息 -->
     <select id="selectByAppId" resultType="applicationModel">
-        SELECT * FROM `APPLICATION` WHERE `APP_ID`=#{_parameter}
+        SELECT * FROM `application` WHERE `APP_ID`=#{_parameter}
     </select>
 
 </mapper>

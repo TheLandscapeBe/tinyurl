@@ -14,7 +14,7 @@
     </insert>
 
     <select id="selectById" resultType="urlModel">
-        SELECT * FROM `URL` WHERE `ID`=#{_parameter}
+        SELECT * FROM `url` WHERE `ID`=#{_parameter}
     </select>
 
 </mapper>
