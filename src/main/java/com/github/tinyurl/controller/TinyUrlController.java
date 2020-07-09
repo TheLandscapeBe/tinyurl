@@ -16,6 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * 短连接生成Controller
@@ -58,15 +59,17 @@ public class TinyUrlController {
         
         Map<String, String[]> parameterMap =request.getParameterMap();
         if (MapUtil.isNotEmpty(parameterMap)) {
-            int index = orgUrl.indexOf(Constants.QUESTION_MARK);
-            if (index != -1) {
-                finalUrl.append(Constants.QUESTION_MARK);
-            }
-
+            AtomicBoolean hasQuestionMark = new AtomicBoolean(orgUrl.indexOf(Constants.QUESTION_MARK) != -1);
             parameterMap.forEach((key, values) -> {
                 if (ArrayUtil.isNotEmpty(values)) {
                     for (String value : values) {
-                        finalUrl.append(Constants.AMPERSAND).append(key).append('=').append(value);
+                        if (hasQuestionMark.get()) {
+                            finalUrl.append(Constants.AMPERSAND).append(key).append('=').append(value);
+                        } else {
+                            hasQuestionMark.set(true);
+                            finalUrl.append(Constants.QUESTION_MARK).append(key).append('=').append(value);
+                        }
+
                     }
                 }
             });

@@ -1,4 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+  * Licensed to the Apache Software Foundation (ASF) under one
+  * or more contributor license agreements. See the NOTICE file
+  * distributed with this work for additional information
+  * regarding copyright ownership. The ASF licenses this file
+  * to you under the Apache License, Version 2.0 (the
+  * "License"); you may not use this file except in compliance
+  * with the License. You may obtain a copy of the License at
+  *
+  * http://www.apache.org/licenses/LICENSE-2.0
+  *
+  * Unless required by applicable law or agreed to in writing,
+  * software distributed under the License is distributed on an
+  * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  * KIND, either express or implied. See the License for the
+  * specific language governing permissions and limitations
+  * under the License.
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -12,11 +30,37 @@
 	<artifactId>tinyURL</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>tinyURL</name>
-	<description>短网址生成</description>
+	<packaging>jar</packaging>
+	<description>tiny url generate</description>
+
+	<developers>
+		<developer>
+			<email>errorfatal89@gmail.com</email>
+			<timezone>GMT+8</timezone>
+		</developer>
+	</developers>
+
+	<url>https://github.com/fofcn/tinyurl</url>
+
+	<licenses>
+		<license>
+			<name>APACHE LICENSE, VERSION 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0</url>
+
+		</license>
+	</licenses>
+
+	<scm>
+		<url>https://github.com/fofcn/tinyurl</url>
+		<connection>scm:git:https://github.com/fofcn/tinyurl.git</connection>
+		<developerConnection>https://github.com/fofcn/tinyurl.git</developerConnection>
+		<tag>1.0.0</tag>
+	</scm>
 
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
+
 
 	<dependencies>
 		<dependency>
@@ -118,10 +162,46 @@
 	</dependencies>
 
 	<build>
+		<finalName>tinyurl</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.4.0</version>
+				<executions>
+					<execution>
+						<id>tag-latest</id>
+						<goals>
+							<goal>build</goal>
+							<goal>push</goal>
+						</goals>
+						<configuration>
+							<tag>latest</tag>
+						</configuration>
+					</execution>
+					<execution>
+						<id>tag-version</id>
+						<goals>
+							<goal>build</goal>
+							<goal>push</goal>
+						</goals>
+						<configuration>
+							<tag>${project.version}</tag>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<repository>${docker.image.prefix}/${project.artifactId}</repository>
+					<buildArgs>
+						<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+					<skip>${dockerfile.skip}</skip>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

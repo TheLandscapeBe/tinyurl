@@ -59,6 +59,7 @@ public class TinyUrlServiceImpl implements TinyUrlService {
         StringBuilder finalUrl = new StringBuilder();
         finalUrl.append(Constants.HTTP_SCHEMA)
                 .append(request.getDomain())
+                .append(Constants.HTTP_SLASH)
                 .append(encode(tinyUrlModel.getId()));
         return finalUrl.toString();
     }
