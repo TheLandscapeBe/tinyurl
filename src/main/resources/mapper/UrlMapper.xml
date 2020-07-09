@@ -5,11 +5,15 @@
     <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="urlModel">
         INSERT INTO `url`
         (
-        
+        `ORIGIN_URL`,
+        `CREATE_TIME`,
+        `EXPIRE_TIME`
         )
         VALUES
         (
-        
+        #{originUrl},
+        #{createTime},
+        #{expireTime}
         )
     </insert>
 

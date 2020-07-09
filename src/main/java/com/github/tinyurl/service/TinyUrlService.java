@@ -1,7 +1,6 @@
 package com.github.tinyurl.service;
 
-import com.github.tinyurl.domain.request.GenerateRequest;
-import com.github.tinyurl.domain.response.GenerateResponse;
+import com.github.tinyurl.domain.request.ShortenRequest;
 
 /**
  * URL生成业务服务
@@ -16,7 +15,7 @@ public interface TinyUrlService {
      * @param generateRequest 生成请求
      * @return 短连接响应字符串
      */
-    String generate(GenerateRequest generateRequest);
+    String shorten(ShortenRequest generateRequest);
 
     /**
      * 获取重定向URL

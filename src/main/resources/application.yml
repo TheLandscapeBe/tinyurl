@@ -3,7 +3,7 @@ spring:
     active: mysql
 
 server:
-  port: 8080
+  port: 80
 
 tinyurl:
   checkSign: false

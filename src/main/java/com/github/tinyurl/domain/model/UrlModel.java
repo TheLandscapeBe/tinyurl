@@ -19,7 +19,7 @@ public class UrlModel {
     /**
      * 原始URL
      */
-    private String orgUrl;
+    private String originUrl;
 
     /**
      * 创建时间

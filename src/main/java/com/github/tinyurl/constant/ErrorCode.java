@@ -8,8 +8,9 @@ package com.github.tinyurl.constant;
  */
 public enum ErrorCode {
     SUCCESS(0, "成功"),
-    DOMAIN_NOT_EXISTS(1, "指定的域名不存在"),
-    RECORD_NOT_EXISTS(1, "记录不存在"),
+    SYSTEM_ERROR(1, "系统错误"),
+    DOMAIN_NOT_EXISTS(100, "指定的域名不存在"),
+    RECORD_NOT_EXISTS(101, "记录不存在"),
     ;
 
     private int code;

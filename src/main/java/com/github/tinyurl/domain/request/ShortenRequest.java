@@ -11,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
  * @date 2020/07/02
  */
 @Data
-public class GenerateRequest {
+public class ShortenRequest {
 
     /**
      * 原始URL

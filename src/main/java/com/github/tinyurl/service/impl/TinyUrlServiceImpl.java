@@ -1,10 +1,11 @@
 package com.github.tinyurl.service.impl;
 
+import com.github.tinyurl.constant.Constants;
 import com.github.tinyurl.constant.ErrorCode;
 import com.github.tinyurl.dao.DomainDao;
 import com.github.tinyurl.dao.UrlDao;
 import com.github.tinyurl.domain.model.UrlModel;
-import com.github.tinyurl.domain.request.GenerateRequest;
+import com.github.tinyurl.domain.request.ShortenRequest;
 import com.github.tinyurl.exception.TinyUrlException;
 import com.github.tinyurl.service.TinyUrlService;
 import com.github.tinyurl.util.DateUtil;
@@ -37,7 +38,7 @@ public class TinyUrlServiceImpl implements TinyUrlService {
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
-    public String generate(GenerateRequest request) {
+    public String shorten(ShortenRequest request) {
         // 检查是否存在该domain
         Integer domainId = domainDao.selectByDomain(request.getDomain());
         if (domainId == null) {
@@ -50,12 +51,16 @@ public class TinyUrlServiceImpl implements TinyUrlService {
         if (StringUtils.isNotEmpty(request.getExpireDate())) {
             tinyUrlModel.setExpireTime(DateUtil.parse(request.getExpireDate()));
         }
-        tinyUrlModel.setOrgUrl(request.getUrl());
+        tinyUrlModel.setOriginUrl(request.getUrl());
         // 获取数据库自增ID
         urlDao.insert(tinyUrlModel);
 
         // 通过ID计算进制字符串
-        return request.getDomain() + encode(tinyUrlModel.getId());
+        StringBuilder finalUrl = new StringBuilder();
+        finalUrl.append(Constants.HTTP_SCHEMA)
+                .append(request.getDomain())
+                .append(encode(tinyUrlModel.getId()));
+        return finalUrl.toString();
     }
 
     @Override
@@ -66,7 +71,7 @@ public class TinyUrlServiceImpl implements TinyUrlService {
             throw new TinyUrlException(ErrorCode.RECORD_NOT_EXISTS);
         }
 
-        return tinyUrlModel.getOrgUrl();
+        return tinyUrlModel.getOriginUrl();
     }
 
     /**

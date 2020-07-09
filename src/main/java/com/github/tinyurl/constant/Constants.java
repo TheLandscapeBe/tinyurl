@@ -8,7 +8,8 @@ package com.github.tinyurl.constant;
  */
 public class Constants {
     public static final char AMPERSAND = '&';
+
     public static final char QUESTION_MARK = '?';
 
-
+    public static final String HTTP_SCHEMA = "http://";
 }

@@ -2,7 +2,7 @@ package com.github.tinyurl.controller;
 
 import com.github.tinyurl.constant.Constants;
 import com.github.tinyurl.domain.Response;
-import com.github.tinyurl.domain.request.GenerateRequest;
+import com.github.tinyurl.domain.request.ShortenRequest;
 import com.github.tinyurl.service.TinyUrlService;
 import com.github.tinyurl.util.ArrayUtil;
 import com.github.tinyurl.util.MapUtil;
@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -35,9 +36,10 @@ public class TinyUrlController {
      * @param generateRequest 生成短连接请求
      * @return 短连接
      */
-    @PostMapping("/generate")
-    public Response generate(@Valid GenerateRequest generateRequest) {
-        String tinyUrl = tinyUrlService.generate(generateRequest);
+    @ResponseBody
+    @PostMapping("/shorten")
+    public Response generate(@Valid ShortenRequest generateRequest) {
+        String tinyUrl = tinyUrlService.shorten(generateRequest);
         return Response.success(tinyUrl);
     }
 
