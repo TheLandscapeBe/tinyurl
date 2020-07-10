@@ -59,6 +59,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<docker.hub.registry>registry.docker.com</docker.hub.registry>
 	</properties>
 
 
@@ -156,7 +157,7 @@
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
-			<version>1.9</version>
+			<version>1.14</version>
 		</dependency>
 
 	</dependencies>
@@ -196,11 +197,10 @@
 					</execution>
 				</executions>
 				<configuration>
-					<repository>${docker.image.prefix}/${project.artifactId}</repository>
+					<repository>fofcn/tinyurl</repository>
 					<buildArgs>
 						<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
 					</buildArgs>
-					<skip>${dockerfile.skip}</skip>
 				</configuration>
 			</plugin>
 		</plugins>

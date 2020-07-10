@@ -12,15 +12,18 @@ public class TinyUrlException extends RuntimeException {
 
     private ErrorCode errorCode;
 
+    private Exception e;
+
     public TinyUrlException(ErrorCode errorCode) {
+        this(errorCode, null);
+    }
+
+    public TinyUrlException(ErrorCode errorCode, Exception e) {
         this.errorCode = errorCode;
+        this.e = e;
     }
 
     public ErrorCode getErrorCode() {
         return errorCode;
-    }
-
-    public void setErrorCode(ErrorCode errorCode) {
-        this.errorCode = errorCode;
     }
 }
