@@ -5,7 +5,7 @@ import com.github.tinyurl.domain.model.UrlModel;
 /**
  * Url DAO
  *
- * @author jiquanxi
+ * @author errorfatal89@gmail.com
  * @date 2020/07/07
  */
 public interface UrlDao {

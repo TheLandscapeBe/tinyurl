@@ -5,7 +5,7 @@ import com.github.tinyurl.constant.ErrorCode;
 /**
  * 短连接服务异常
  *
- * @author jiquanxi
+ * @author errorfatal89@gmail.com
  * @date 2020/07/07
  */
 public class TinyUrlException extends RuntimeException {

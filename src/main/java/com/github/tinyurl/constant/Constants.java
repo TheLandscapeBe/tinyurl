@@ -20,7 +20,7 @@ package com.github.tinyurl.constant;
 /**
  *
  *
- * @author jiquanxi
+ * @author errorfatal89@gmail.com
  * @date 2020/07/07
  */
 public class Constants {

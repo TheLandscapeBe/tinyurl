@@ -7,3 +7,4 @@ server:
 
 tinyurl:
   checkSign: false
+  tsThresholdMillis: 300000

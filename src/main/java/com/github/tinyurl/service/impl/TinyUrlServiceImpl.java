@@ -10,7 +10,7 @@ import com.github.tinyurl.exception.TinyUrlException;
 import com.github.tinyurl.service.TinyUrlService;
 import com.github.tinyurl.util.DateUtil;
 import com.github.tinyurl.util.ObjectUtil;
-import com.github.tinyurl.util.StringUtils;
+import com.github.tinyurl.util.StringUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,7 +48,7 @@ public class TinyUrlServiceImpl implements TinyUrlService {
         // 插入记录到数据库
         UrlModel tinyUrlModel = new UrlModel();
         tinyUrlModel.setCreateTime(new Date());
-        if (StringUtils.isNotEmpty(request.getExpireDate())) {
+        if (StringUtil.isNotEmpty(request.getExpireDate())) {
             tinyUrlModel.setExpireTime(DateUtil.parse(request.getExpireDate()));
         }
         tinyUrlModel.setOriginUrl(request.getUrl());
