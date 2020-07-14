@@ -17,9 +17,16 @@ public interface UrlDao {
     void insert(UrlModel urlModel);
 
     /**
-     * 根据ID查询域名记录
+     * 根据ID查询URL记录
      * @param id 主键ID
      * @return 域名记录
      */
     UrlModel selectById(Long id);
+
+    /**
+     * 根据哈希值查询URL记录
+     * @param hash
+     * @return
+     */
+    UrlModel selectByHash(String hash);
 }

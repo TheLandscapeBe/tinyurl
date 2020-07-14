@@ -1,7 +1,6 @@
 package com.github.tinyurl.domain.model;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 
@@ -13,13 +12,18 @@ import java.util.Date;
  */
 @Data
 public class UrlModel {
-    @Id
+
     private Long id;
 
     /**
      * 原始URL
      */
     private String originUrl;
+
+    /**
+     * 原始链接哈希值
+     */
+    private String hash;
 
     /**
      * 创建时间

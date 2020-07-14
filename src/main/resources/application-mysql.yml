@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/tiny_urldb?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+    url: jdbc:mysql://tinyurl.fofcn.com:3306/tiny_urldb?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
     username: tinyurl_user
     password: Yy123456.
     driver-class-name: com.mysql.jdbc.Driver
@@ -10,10 +10,6 @@ spring:
       maximum-pool-size: 20
       max-lifetime: 1800000
       minimum-idle: 5
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-    show-sql: true
 
 mybatis:
   config-location: classpath:mybatis-config.xml

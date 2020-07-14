@@ -9,6 +9,7 @@ import com.github.tinyurl.domain.request.ShortenRequest;
 import com.github.tinyurl.exception.TinyUrlException;
 import com.github.tinyurl.service.TinyUrlService;
 import com.github.tinyurl.util.DateUtil;
+import com.github.tinyurl.util.Md5Util;
 import com.github.tinyurl.util.ObjectUtil;
 import com.github.tinyurl.util.StringUtil;
 import org.springframework.stereotype.Service;
@@ -45,22 +46,28 @@ public class TinyUrlServiceImpl implements TinyUrlService {
             throw new TinyUrlException(ErrorCode.DOMAIN_NOT_EXISTS);
         }
 
-        // 插入记录到数据库
-        UrlModel tinyUrlModel = new UrlModel();
-        tinyUrlModel.setCreateTime(new Date());
-        if (StringUtil.isNotEmpty(request.getExpireDate())) {
-            tinyUrlModel.setExpireTime(DateUtil.parse(request.getExpireDate()));
+        // 校验URL是否已经生成了短连接,不存在则插入
+        String hash = Md5Util.encode(request.getUrl(), StringUtil.EMPTY);
+        UrlModel urlModel = urlDao.selectByHash(hash);
+        if (ObjectUtil.isNull(urlModel)) {
+            // 插入记录到数据库
+            urlModel = new UrlModel();
+            urlModel.setCreateTime(new Date());
+            if (StringUtil.isNotEmpty(request.getExpireDate())) {
+                urlModel.setExpireTime(DateUtil.parse(request.getExpireDate()));
+            }
+            urlModel.setOriginUrl(request.getUrl());
+            urlModel.setHash(hash);
+            // 获取数据库自增ID
+            urlDao.insert(urlModel);
         }
-        tinyUrlModel.setOriginUrl(request.getUrl());
-        // 获取数据库自增ID
-        urlDao.insert(tinyUrlModel);
 
         // 通过ID计算进制字符串
         StringBuilder finalUrl = new StringBuilder();
         finalUrl.append(Constants.HTTP_SCHEMA)
                 .append(request.getDomain())
                 .append(Constants.HTTP_SLASH)
-                .append(encode(tinyUrlModel.getId()));
+                .append(encode(urlModel.getId()));
         return finalUrl.toString();
     }
 

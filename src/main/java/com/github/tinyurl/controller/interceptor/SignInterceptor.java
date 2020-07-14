@@ -38,6 +38,10 @@ public class SignInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if (!tinyUrlConfig.isCheckSign()) {
+            return true;
+        }
+
         String timestamp = request.getParameter("timestamp");
         String appId = request.getParameter("appId");
         String nonceStr = request.getParameter("nonceStr");
