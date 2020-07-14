@@ -54,13 +54,14 @@ public class SignInterceptor implements HandlerInterceptor {
                 return false;
             }
         }
-        ApplicationModel applicationModel = null;
         if (StringUtil.isEmpty(appId)) {
-            applicationModel = applicationService.selectByAppId(appId);
-            if (ObjectUtil.isNull(applicationModel)) {
-                WebUtil.printJson(response, Response.failure(ErrorCode.APP_NOT_EXISTING));
-                return false;
-            }
+            WebUtil.printJson(response, Response.failure(ErrorCode.APP_NOT_EXISTING));
+            return false;
+        }
+        ApplicationModel applicationModel = applicationService.selectByAppId(appId);
+        if (ObjectUtil.isNull(applicationModel)) {
+            WebUtil.printJson(response, Response.failure(ErrorCode.APP_NOT_EXISTING));
+            return false;
         }
 
         if (StringUtil.isEmpty(nonceStr) && nonceStr.length() < NONCE_STR_LENGTH_THRESHOLD) {

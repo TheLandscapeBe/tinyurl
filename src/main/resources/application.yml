@@ -6,5 +6,5 @@ server:
   port: 80
 
 tinyurl:
-  checkSign: false
+  checkSign: true
   tsThresholdMillis: 300000
