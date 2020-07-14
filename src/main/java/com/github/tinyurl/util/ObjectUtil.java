@@ -8,6 +8,8 @@ package com.github.tinyurl.util;
  */
 public class ObjectUtil {
 
+    private ObjectUtil() {}
+
     public static boolean isNull(Object o) {
         return o == null;
     }

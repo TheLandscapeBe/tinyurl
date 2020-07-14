@@ -10,6 +10,8 @@ import java.util.Map;
  */
 public class MapUtil {
 
+    private MapUtil() {}
+
     public static boolean isNotEmpty(Map map) {
         return map != null && !map.isEmpty();
     }

@@ -7,7 +7,7 @@ package com.github.tinyurl.util;
  * @date 2020/07/07
  */
 public class ArrayUtil {
-
+    private ArrayUtil() {}
     public static boolean isNotEmpty(Object[] arr) {
         return arr != null && arr.length > 0;
     }

@@ -6,5 +6,5 @@ package com.github.tinyurl.domain.response;
  * @author errorfatal89@gmail.com
  * @date 2020/07/02
  */
-public class GenerateResponse {
+public interface GenerateResponse {
 }

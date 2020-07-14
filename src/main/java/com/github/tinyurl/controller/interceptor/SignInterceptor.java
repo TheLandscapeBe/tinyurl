@@ -9,11 +9,8 @@ import com.github.tinyurl.util.ObjectUtil;
 import com.github.tinyurl.util.SignUtil;
 import com.github.tinyurl.util.StringUtil;
 import com.github.tinyurl.util.WebUtil;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.util.WebUtils;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -74,7 +71,7 @@ public class SignInterceptor implements HandlerInterceptor {
             return false;
         }
 
-        boolean ret = tinyUrlConfig.isCheckSign() ? SignUtil.check(request, applicationModel.getAccessKey()) : true;
+        boolean ret = SignUtil.check(request, applicationModel.getAccessKey());
         if (!ret) {
             WebUtil.printJson(response, Response.failure(ErrorCode.SIGN_NOT_MATCH));
         }

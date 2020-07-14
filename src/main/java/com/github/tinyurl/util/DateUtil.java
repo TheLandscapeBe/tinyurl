@@ -13,6 +13,8 @@ import java.util.Date;
  */
 public class DateUtil {
 
+    private DateUtil() {}
+
     public static Date parse(String str) {
         LocalDateTime localDateTime = LocalDateTime.parse(str);
         ZoneId zoneId = ZoneId.systemDefault();

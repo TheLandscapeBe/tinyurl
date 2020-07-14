@@ -1,14 +1,8 @@
 package com.github.tinyurl.util;
 
 import com.github.tinyurl.constant.Constants;
-import com.github.tinyurl.constant.ErrorCode;
-import com.github.tinyurl.exception.TinyUrlException;
-import org.apache.commons.codec.binary.Hex;
 
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
 import javax.servlet.http.HttpServletRequest;
-import java.nio.charset.StandardCharsets;
 import java.util.Enumeration;
 import java.util.Map;
 import java.util.TreeMap;
@@ -20,6 +14,8 @@ import java.util.TreeMap;
  * @date 2020/07/07
  */
 public class SignUtil {
+
+    private SignUtil() {}
 
     public static final String SIGN_KEY = "sign";
 
@@ -61,9 +57,7 @@ public class SignUtil {
      */
     public static String sign(Map<String, String> params, String key) {
         StringBuilder paramString = new StringBuilder();
-        params.forEach((paramKey, value) -> {
-            paramString.append(paramKey).append(Constants.EQUALS_MARK).append(value).append(Constants.AMPERSAND);
-        });
+        params.forEach((paramKey, value) -> paramString.append(paramKey).append(Constants.EQUALS_MARK).append(value).append(Constants.AMPERSAND));
         paramString.append(ACCESS_KEY).append(Constants.EQUALS_MARK).append(key);
 
         return HmacUtil.hmacSha256(paramString.toString(), key);

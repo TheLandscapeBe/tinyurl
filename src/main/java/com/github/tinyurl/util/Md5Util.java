@@ -10,6 +10,8 @@ import org.apache.commons.codec.digest.DigestUtils;
  */
 public class Md5Util {
 
+    private Md5Util() {}
+
     /**
      * md编码
      * @param str 原始字符串

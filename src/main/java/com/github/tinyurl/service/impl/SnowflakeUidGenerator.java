@@ -12,19 +12,19 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SnowflakeUidGenerator implements UidGenerator {
 
-    private static final long epoch = 1594720861895L;
+    private static final long EPOCH = 1594720861895L;
 
-    private static final long workerIdBits = 5L;
-    private static final long datacenterIdBits = 5L;
-    private static final long sequenceBits = 12L;
+    private static final long WORKER_ID_BITS = 5L;
+    private static final long DATACENTER_ID_BITS = 5L;
+    private static final long SEQUENCE_BITS = 12L;
 
-    private static final long workerIdShift = sequenceBits;
-    private static final long datacenterIdShift = sequenceBits + workerIdBits;
-    private static final long timestampShift = sequenceBits + workerIdBits + datacenterIdBits;
+    private static final long WORKER_ID_SHIFT = SEQUENCE_BITS;
+    private static final long DATACENTER_ID_SHIFT = SEQUENCE_BITS + WORKER_ID_BITS;
+    private static final long TIMESTAMP_SHIFT = SEQUENCE_BITS + WORKER_ID_BITS + DATACENTER_ID_BITS;
 
-    private static final long sequenceMask = -1L ^ (-1L << sequenceBits);
-    private static final long workerIdMask = -1L ^ (-1L << workerIdBits);
-    private static final long datacenterIdMask = -1L ^ (-1L << datacenterIdBits);
+    private static final long SEQUENCE_MASK = -1L ^ (-1L << SEQUENCE_BITS);
+    private static final long WORKER_ID_MASK = -1L ^ (-1L << WORKER_ID_BITS);
+    private static final long DATACENTER_ID_MASK = -1L ^ (-1L << DATACENTER_ID_BITS);
 
     private final long workerId;
     private final long datacenterId;
@@ -33,17 +33,16 @@ public class SnowflakeUidGenerator implements UidGenerator {
     private long lastTimestamp = -1L;
 
     public SnowflakeUidGenerator(final long datacenterId, final long workerId) {
-        this.datacenterId = datacenterId & datacenterIdMask;
-        this.workerId = workerId & workerIdMask;
+        this.datacenterId = datacenterId & DATACENTER_ID_MASK;
+        this.workerId = workerId & WORKER_ID_MASK;
     }
 
     public synchronized long nextId() {
         long timestamp = timestamp();
 
         if (lastTimestamp == timestamp) {
-            sequence = (sequence + 1) & sequenceMask;
+            sequence = (sequence + 1) & SEQUENCE_MASK;
             if (sequence == 0) {
-                System.out.println("rollover");
                 timestamp = tilNextMillis(lastTimestamp);
             }
         } else {
@@ -56,9 +55,9 @@ public class SnowflakeUidGenerator implements UidGenerator {
         }
 
         lastTimestamp = timestamp;
-        return ((timestamp - epoch) << timestampShift)
-                | (datacenterId << datacenterIdShift)
-                | (workerId << workerIdShift)
+        return ((timestamp - EPOCH) << TIMESTAMP_SHIFT)
+                | (datacenterId << DATACENTER_ID_SHIFT)
+                | (workerId << WORKER_ID_SHIFT)
                 | sequence;
     }
 

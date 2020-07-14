@@ -1,7 +1,6 @@
 package com.github.tinyurl.config;
 
 import com.github.tinyurl.controller.interceptor.SignInterceptor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

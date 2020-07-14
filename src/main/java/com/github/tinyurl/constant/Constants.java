@@ -24,6 +24,9 @@ package com.github.tinyurl.constant;
  * @date 2020/07/07
  */
 public class Constants {
+
+    private Constants() {}
+
     public static final char AMPERSAND = '&';
 
     public static final char EQUALS_MARK = '=';

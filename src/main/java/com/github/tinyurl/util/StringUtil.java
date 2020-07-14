@@ -8,6 +8,8 @@ package com.github.tinyurl.util;
  */
 public class StringUtil {
 
+    private StringUtil() {}
+
     public static final String EMPTY = "";
 
     public static boolean isEmpty(String str) {
