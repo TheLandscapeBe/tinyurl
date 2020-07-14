@@ -5,7 +5,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 /**
  * MD5哈希工具类
  *
- * @author jiquanxi
+ * @author errorfatal89@gmail.com
  * @date 2020/07/14
  */
 public class Md5Util {

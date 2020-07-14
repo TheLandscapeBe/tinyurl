@@ -68,5 +68,4 @@ public class SignUtil {
 
         return HmacUtil.hmacSha256(paramString.toString(), key);
     }
-
 }

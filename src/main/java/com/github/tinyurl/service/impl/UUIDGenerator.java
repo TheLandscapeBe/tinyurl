@@ -6,7 +6,7 @@ import java.util.UUID;
 
 /**
  * Java UUID生成器
- * @author jiquanxi
+ * @author errorfatal89@gmail.com
  */
 public class UUIDGenerator implements UidGenerator {
     @Override

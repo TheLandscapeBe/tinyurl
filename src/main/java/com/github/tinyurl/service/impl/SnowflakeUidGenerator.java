@@ -4,7 +4,7 @@ package com.github.tinyurl.service.impl;
  * snowflake 有序ID生成器
  * @see http://github.com/twitter/snowflake
  *
- * @author jiquanxi
+ * @author errorfatal89@gmail.com
  */
 import com.github.tinyurl.service.UidGenerator;
 import lombok.extern.slf4j.Slf4j;
@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class SnowflakeUidGenerator implements UidGenerator {
 
-    private static final long epoch = 1288834974657L;
+    private static final long epoch = 1594720861895L;
 
     private static final long workerIdBits = 5L;
     private static final long datacenterIdBits = 5L;

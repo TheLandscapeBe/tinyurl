@@ -2,7 +2,7 @@ package com.github.tinyurl.service;
 
 /**
  * UI生成器
- * @author jiquanxi
+ * @author errorfatal89@gmail.com
  */
 public interface UidGenerator {
 
