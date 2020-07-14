@@ -1,5 +1,7 @@
 package com.github.tinyurl.domain.request;
 
+import com.github.tinyurl.service.UidGeneratorParam;
+import com.github.tinyurl.service.UidObject;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
@@ -11,7 +13,7 @@ import javax.validation.constraints.NotEmpty;
  * @date 2020/07/02
  */
 @Data
-public class ShortenRequest {
+public class ShortenRequest implements UidGeneratorParam {
 
     /**
      * 原始URL

@@ -24,4 +24,9 @@ public class TinyUrlConfig {
      * 签名时间戳失效最大值(毫秒)
      */
     private long tsThresholdMillis;
+
+    /**
+     * uid生成算法
+     */
+    private String uidGenType;
 }

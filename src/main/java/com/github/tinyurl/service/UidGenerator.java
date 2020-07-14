@@ -6,5 +6,10 @@ package com.github.tinyurl.service;
  */
 public interface UidGenerator {
 
-    String generate();
+    /**
+     * uid生成
+     * @param param
+     * @return
+     */
+    UidObject generate(UidGeneratorParam param);
 }

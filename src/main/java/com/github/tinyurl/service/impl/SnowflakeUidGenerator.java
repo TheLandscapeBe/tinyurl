@@ -6,10 +6,19 @@ package com.github.tinyurl.service.impl;
  *
  * @author errorfatal89@gmail.com
  */
+import com.github.tinyurl.config.SnowflakeConfig;
 import com.github.tinyurl.service.UidGenerator;
+import com.github.tinyurl.service.UidGeneratorParam;
+import com.github.tinyurl.service.UidObject;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 @Slf4j
+@Service("snowflakeUidGenerator")
 public class SnowflakeUidGenerator implements UidGenerator {
 
     private static final long EPOCH = 1594720861895L;
@@ -26,15 +35,23 @@ public class SnowflakeUidGenerator implements UidGenerator {
     private static final long WORKER_ID_MASK = -1L ^ (-1L << WORKER_ID_BITS);
     private static final long DATACENTER_ID_MASK = -1L ^ (-1L << DATACENTER_ID_BITS);
 
-    private final long workerId;
-    private final long datacenterId;
+    private long workerId;
+    private long datacenterId;
 
     private long sequence = 0L;
     private long lastTimestamp = -1L;
 
-    public SnowflakeUidGenerator(final long datacenterId, final long workerId) {
-        this.datacenterId = datacenterId & DATACENTER_ID_MASK;
-        this.workerId = workerId & WORKER_ID_MASK;
+    @Resource
+    private SnowflakeConfig snowflakeConfig;
+
+
+    public SnowflakeUidGenerator() {}
+
+    @Bean(initMethod = "initialize")
+    @DependsOn("snowflakeConfig")
+    public void initialize() {
+        this.datacenterId = snowflakeConfig.getDataCenterId() & DATACENTER_ID_MASK;
+        this.workerId = snowflakeConfig.getWorkerId() & WORKER_ID_MASK;
     }
 
     public synchronized long nextId() {
@@ -74,7 +91,7 @@ public class SnowflakeUidGenerator implements UidGenerator {
     }
 
     @Override
-    public String generate() {
-        return String.valueOf(nextId());
+    public UidObject generate(UidGeneratorParam param) {
+        return new SnowflakeUidObject(nextId());
     }
 }

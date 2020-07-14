@@ -16,6 +16,7 @@ public enum ErrorCode {
     NONCE_STR_TOO_SHORT(103, "nonceStr长度太短,至少16位"),
     SIGN_NOT_EXISTING(104, "请进行签名（miss sign field）"),
     SIGN_NOT_MATCH(105, "签名错误（sign error）"),
+    UID_GEN_TYPE_NOT_EXISTING(106, "UID生成算法不存在（uid generator does not exists）"),
     ;
 
     private int code;

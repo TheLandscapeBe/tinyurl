@@ -1,5 +1,7 @@
 package com.github.tinyurl.util;
 
+import com.github.tinyurl.service.UidGenerator;
+
 import java.util.Map;
 
 /**
@@ -14,5 +16,9 @@ public class MapUtil {
 
     public static boolean isNotEmpty(Map map) {
         return map != null && !map.isEmpty();
+    }
+
+    public static boolean isEmpty(Map map) {
+        return map == null || map.isEmpty();
     }
 }

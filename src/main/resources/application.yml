@@ -8,3 +8,8 @@ server:
 tinyurl:
   checkSign: true
   tsThresholdMillis: 300000
+  uidGenType: snowflake
+
+  snowflake:
+    dataCenterId: 0
+    workerId: 0

@@ -1,5 +1,6 @@
 package com.github.tinyurl.service.impl;
 
+import com.github.tinyurl.config.TinyUrlConfig;
 import com.github.tinyurl.constant.Constants;
 import com.github.tinyurl.constant.ErrorCode;
 import com.github.tinyurl.dao.DomainDao;
@@ -8,6 +9,10 @@ import com.github.tinyurl.domain.model.UrlModel;
 import com.github.tinyurl.domain.request.ShortenRequest;
 import com.github.tinyurl.exception.TinyUrlException;
 import com.github.tinyurl.service.TinyUrlService;
+import com.github.tinyurl.service.UidGenerator;
+import com.github.tinyurl.service.UidGeneratorFactory;
+import com.github.tinyurl.service.UidGeneratorParam;
+import com.github.tinyurl.service.UidObject;
 import com.github.tinyurl.util.DateUtil;
 import com.github.tinyurl.util.Md5Util;
 import com.github.tinyurl.util.ObjectUtil;
@@ -36,6 +41,12 @@ public class TinyUrlServiceImpl implements TinyUrlService {
     @Resource
     private DomainDao domainDao;
 
+    @Resource
+    private TinyUrlConfig tinyUrlConfig;
+
+    @Resource
+    private UidGeneratorFactory uidGeneratorFactory;
+
 
     @Override
     @Transactional(rollbackFor = Throwable.class)
@@ -46,28 +57,29 @@ public class TinyUrlServiceImpl implements TinyUrlService {
             throw new TinyUrlException(ErrorCode.DOMAIN_NOT_EXISTS);
         }
 
-        // 校验URL是否已经生成了短连接,不存在则插入
+        long uid = 0L;
         String hash = Md5Util.encode(request.getUrl(), StringUtil.EMPTY);
         UrlModel urlModel = urlDao.selectByHash(hash);
-        if (ObjectUtil.isNull(urlModel)) {
-            // 插入记录到数据库
-            urlModel = new UrlModel();
-            urlModel.setCreateTime(new Date());
-            if (StringUtil.isNotEmpty(request.getExpireDate())) {
-                urlModel.setExpireTime(DateUtil.parse(request.getExpireDate()));
+        if (ObjectUtil.isNotNull(urlModel)) {
+            uid = urlModel.getId();
+        } else {
+            UidGenerator uidGenerator = uidGeneratorFactory.getUidGenerator(tinyUrlConfig.getUidGenType());
+            if (ObjectUtil.isNull(uidGenerator)) {
+                throw new TinyUrlException(ErrorCode.UID_GEN_TYPE_NOT_EXISTING);
             }
-            urlModel.setOriginUrl(request.getUrl());
-            urlModel.setHash(hash);
-            // 获取数据库自增ID
-            urlDao.insert(urlModel);
+
+            UidObject uidObject = uidGenerator.generate(request);
+            uid = uidObject.getLongUid();
         }
+
+        // 校验是否重复
 
         // 通过ID计算进制字符串
         StringBuilder finalUrl = new StringBuilder();
         finalUrl.append(Constants.HTTP_SCHEMA)
                 .append(request.getDomain())
                 .append(Constants.HTTP_SLASH)
-                .append(encode(urlModel.getId()));
+                .append(encode(uid));
         return finalUrl.toString();
     }
 
