@@ -1,4 +1,4 @@
-FROM registry.docker.com/openjdk:8
+FROM openjdk:8
 VOLUME /data
 ARG JAR_FILE
 ADD  ./target/${JAR_FILE} tinyurl.jar
