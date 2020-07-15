@@ -17,6 +17,12 @@ public interface UrlDao {
     void insert(UrlModel urlModel);
 
     /**
+     * 插入数据库
+     * @param urlModel url模型
+     */
+    void insertWithId(UrlModel urlModel);
+
+    /**
      * 根据ID查询URL记录
      * @param id 主键ID
      * @return 域名记录

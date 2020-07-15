@@ -20,14 +20,17 @@ snowflake算法为twitter设计，特点ID有序且为数字，适合中大型�
 1 选取字母表ALPHABET=[0-9a-zA-Z],字母表长度ALPHABET_LENGTH=62，所有使用62进制，
 
 ```java
-private String encode(long number) {    
-    StringBuilder chip = new StringBuilder(8);    
-    while (number > 0) {        
-        chip.append(ALPHABET.charAt((int)(number % ALPHABET_LENGTH)));        
-        number /= ALPHABET_LENGTH;    
-    }    
-    return chip.reverse().toString();
-}
+private static String encode(long number) {
+        StringBuilder chip = new StringBuilder(9);
+        while (number > 0) {
+            int mod = (int)(number % ALPHABET_LENGTH);
+            chip.append(ALPHABET.charAt(mod));
+            number -= mod;
+            number /= ALPHABET_LENGTH;
+        }
+
+        return chip.reverse().toString();
+    }
 
 
 ```

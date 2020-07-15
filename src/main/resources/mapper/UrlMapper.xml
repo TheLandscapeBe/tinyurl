@@ -19,6 +19,25 @@
         )
     </insert>
 
+    <insert id="insertWithId" parameterType="urlModel">
+        INSERT INTO `url`
+        (
+        `ID`,
+        `ORIGIN_URL`,
+        `HASH`,
+        `CREATE_TIME`,
+        `EXPIRE_TIME`
+        )
+        VALUES
+        (
+        #{id},
+        #{originUrl},
+        #{hash},
+        #{createTime},
+        #{expireTime}
+        )
+    </insert>
+
     <select id="selectById" resultType="urlModel">
         SELECT * FROM `url` WHERE `ID`=#{_parameter}
     </select>

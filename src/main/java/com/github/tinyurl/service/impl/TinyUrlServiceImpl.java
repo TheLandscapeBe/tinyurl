@@ -57,6 +57,7 @@ public class TinyUrlServiceImpl implements TinyUrlService {
             throw new TinyUrlException(ErrorCode.DOMAIN_NOT_EXISTS);
         }
 
+        // 通过ID计算进制字符串
         long uid = 0L;
         String hash = Md5Util.encode(request.getUrl(), StringUtil.EMPTY);
         UrlModel urlModel = urlDao.selectByHash(hash);
@@ -72,9 +73,6 @@ public class TinyUrlServiceImpl implements TinyUrlService {
             uid = uidObject.getLongUid();
         }
 
-        // 校验是否重复
-
-        // 通过ID计算进制字符串
         StringBuilder finalUrl = new StringBuilder();
         finalUrl.append(Constants.HTTP_SCHEMA)
                 .append(request.getDomain())
@@ -100,9 +98,11 @@ public class TinyUrlServiceImpl implements TinyUrlService {
      * @return 短连接字符串
      */
     private static String encode(long number) {
-        StringBuilder chip = new StringBuilder(8);
+        StringBuilder chip = new StringBuilder(9);
         while (number > 0) {
-            chip.append(ALPHABET.charAt((int)(number % ALPHABET_LENGTH)));
+            int mod = (int)(number % ALPHABET_LENGTH);
+            chip.append(ALPHABET.charAt(mod));
+            number -= mod;
             number /= ALPHABET_LENGTH;
         }
 

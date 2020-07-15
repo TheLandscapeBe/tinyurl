@@ -7,15 +7,21 @@ package com.github.tinyurl.service.impl;
  * @author errorfatal89@gmail.com
  */
 import com.github.tinyurl.config.SnowflakeConfig;
+import com.github.tinyurl.dao.UrlDao;
+import com.github.tinyurl.domain.model.UrlModel;
+import com.github.tinyurl.domain.request.ShortenRequest;
 import com.github.tinyurl.service.UidGenerator;
 import com.github.tinyurl.service.UidGeneratorParam;
 import com.github.tinyurl.service.UidObject;
+import com.github.tinyurl.util.Md5Util;
+import com.github.tinyurl.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 
 @Slf4j
 @Service("snowflakeUidGenerator")
@@ -43,6 +49,9 @@ public class SnowflakeUidGenerator implements UidGenerator {
 
     @Resource
     private SnowflakeConfig snowflakeConfig;
+
+    @Resource
+    private UrlDao urlDao;
 
 
     public SnowflakeUidGenerator() {}
@@ -92,6 +101,14 @@ public class SnowflakeUidGenerator implements UidGenerator {
 
     @Override
     public UidObject generate(UidGeneratorParam param) {
-        return new SnowflakeUidObject(nextId());
+        long id = nextId();
+        ShortenRequest request = (ShortenRequest) param;
+        UrlModel urlModel = new UrlModel();
+        urlModel.setCreateTime(new Date());
+        urlModel.setOriginUrl(request.getUrl());
+        urlModel.setHash(Md5Util.encode(request.getUrl(), StringUtil.EMPTY));
+        urlModel.setId(id);
+        urlDao.insertWithId(urlModel);
+        return new SnowflakeUidObject(id);
     }
 }
