@@ -1,7 +1,73 @@
  # 短连接生成服务
  ## 如何使用？
- 1. 
- 2. 
+ ### 数据库初始化
+ 1. 数据库初始化脚本 <br>
+```sql
+CREATE TABLE `application` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `access_key` varchar(256) NOT NULL DEFAULT '' COMMENT '密钥',
+  `name` varchar(256) NOT NULL DEFAULT '' COMMENT '应用名称',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `app_id` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '应用ID',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='应用';
+
+CREATE TABLE `domain` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `domain` varchar(256) NOT NULL DEFAULT '' COMMENT '域名',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='域名';
+
+CREATE TABLE `url` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `origin_url` varchar(5000) NOT NULL DEFAULT '' COMMENT '原始URL',
+  `hash` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '' COMMENT '原始URL MD5哈希值',
+  `create_time` datetime NOT NULL,
+  `expire_time` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='URL记录';
+```
+
+  增加测试应用
+  ```sql
+   INSERT INTO `application` VALUES ('1', '1594708959736', '测试应用', '2020-07-14 14:43:12', '1594708959736');
+  ```
+
+   增加测试域名
+   ```sql
+    INSERT INTO `domain` VALUES ('1', 'e.example.com');
+   ```
+  ### 服务部署
+  服务数据可以使用jar部署，docker镜像部署
+  1. 使用jar包部署 <br>
+   1.1 代码克隆 <br>
+   ```shell script
+    git clone https://github.com/fofcn/tinyurl.git
+   ```
+   1.2 代码打包为jar <br>
+   ```shell script
+    cd tinyurl
+    mvn clean package -Dmaven.test.skip=true
+   ```
+  2. 编译docker镜像部署
+    ```shell script
+      git clone https://github.com/fofcn/tinyurl.git
+     ```
+     1.2 代码打包为镜像 <br>
+     ```shell script
+      docker login
+      docker build -t tinyurl .
+      docker tag tinyurl ${registry}/name/image-name:${tag}
+      docker push ${registry}/name/image-name:${tag}
+      
+     #例如在我的环境中执行命令
+     docker login 
+     docker build -t tinyurl .
+     docker tag tinyurl fofcn/tinyurl:v0.2.0
+     doker push fofcn/tinyurl
+     ```
+  3. 直接使用docker镜像部署
+  在环境执行docker pull fofcn/tinyurl:${tag}
  # 接口列表
 1 生成短链接<br>
 2 打开短链接 <br>
