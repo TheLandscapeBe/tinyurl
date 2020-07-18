@@ -40,9 +40,9 @@ INSERT INTO `domain` VALUES ('1', 'e.example.com');
 ### 服务部署
 服务数据可以使用jar部署，docker镜像部署
 1. 使用jar包部署 
-  1.1 代码克隆  
+1.1 代码克隆  
  ```shell script
- git clone https://github.com/fofcn/tinyurl.git
+git clone https://github.com/fofcn/tinyurl.git
  ```
 1.2 代码打包为jar 
 ```shell script
@@ -51,24 +51,25 @@ mvn clean package -Dmaven.test.skip=true
 java -jar -Xms128M -Xmx256M tinyurl.jar
 ```
 2. 编译docker镜像部署  
+2.1 代码下载
  ```shell script
- git clone https://github.com/fofcn/tinyurl.git
+git clone https://github.com/fofcn/tinyurl.git
  ```
- 1.2 代码打包为镜像  
+2.2 代码打包为镜像  
  ```shell script
- docker login
- docker build -t tinyurl .
- docker tag tinyurl ${registry}/name/image-name:${tag}
- docker push ${registry}/name/image-name:${tag}
-  
- #例如在我的环境中执行命令
- docker login 
- docker build -t tinyurl .
- docker tag tinyurl fofcn/tinyurl:v0.2.0
- docker push fofcn/tinyurl
+docker login
+docker build -t tinyurl .
+docker tag tinyurl ${registry}/name/image-name:${tag}
+docker push ${registry}/name/image-name:${tag}
+
+#例如在我的环境中执行命令
+docker login 
+docker build -t tinyurl .
+docker tag tinyurl fofcn/tinyurl:v0.2.0
+docker push fofcn/tinyurl
  ```
-3 使用docker镜像部署  
-3.1 编写docker-compose.yml   
+2.3 使用docker镜像部署  
+2.3.1 编写docker-compose.yml   
 ```yaml
 # MAINTAINER: errorfatal89@gmail.com
 version: '3'
@@ -85,9 +86,9 @@ services:
 	  - SPRING_DATASOURCE_USERNAME=tinyurl_user
 	  - SPRING_DATASOUCE_PASSWORD=Yy123456.
 ```
-3.2 docker-compose启动  
+2.3.2 docker-compose启动  
 ```shell script
-    docker-compose up -d
+docker-compose up -d
 ```
 
  # 接口列表
