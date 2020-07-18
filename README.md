@@ -40,7 +40,7 @@ CREATE TABLE `url` (
   ### 服务部署
   服务数据可以使用jar部署，docker镜像部署
   1. 使用jar包部署 <br>
-   1.1 代码克隆 <br>
+      1.1 代码克隆 <br>
    ```shell script
     git clone https://github.com/fofcn/tinyurl.git
    ```
@@ -50,7 +50,8 @@ CREATE TABLE `url` (
     mvn clean package -Dmaven.test.skip=true
     java -jar -Xms128M -Xmx256M tinyurl.jar
    ```
-  2. 编译docker镜像部署
+  2. 编译docker镜像部署 <br>
+
     ```shell script
       git clone https://github.com/fofcn/tinyurl.git
      ```
@@ -67,9 +68,9 @@ CREATE TABLE `url` (
      docker tag tinyurl fofcn/tinyurl:v0.2.0
      docker push fofcn/tinyurl
      ```
-  3. 使用docker镜像部署
-    3.1 编写docker-compose.yml 
-    ```yml
+  3. 使用docker镜像部署 <br>3.1 编写docker-compose.yml  <br>
+
+    
         # MAINTAINER: errorfatal89@gmail.com
         version: '3'
         services:
@@ -84,12 +85,15 @@ CREATE TABLE `url` (
               - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/tiny_urldb?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
               - SPRING_DATASOURCE_USERNAME=tinyurl_user
               - SPRING_DATASOUCE_PASSWORD=Yy123456.
-    ```
-    3.2 docker-compose启动
-    ```shell
-        docker-compose up -d
-    ```
+    
+​        3.2 docker-compose启动 <br>
+
+        ```shell
+            docker-compose up -d
+        ```
+
  # 接口列表
+
 1 生成短链接<br>
 2 打开短链接 <br>
 
