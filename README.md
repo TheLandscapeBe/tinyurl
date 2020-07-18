@@ -75,18 +75,26 @@ docker push fofcn/tinyurl
 ```yaml
 # MAINTAINER: errorfatal89@gmail.com
 version: '3'
+
+networks:
+  your-network-name:
+    driver: bridge
+
 services:
   tinyurl:
-	image: fofcn/tinyurl:v1.1.0
-	restart: always
-	ports:
-	  - "53000:53000"
-	environment:
-	  - SERVER_PORT=53000
-	  - SPRING_PROFILES_ACTIVE=mysql
-	  - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/tiny_urldb?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
-	  - SPRING_DATASOURCE_USERNAME=tinyurl_user
-	  - SPRING_DATASOURCE_PASSWORD=Yy123456.
+    image: fofcn/tinyurl:latest
+    restart: always
+    ports:
+      - "53000:53000"
+    networks:
+      your-network-name:
+        
+    environment:
+      - SERVER_PORT=53000
+      - SPRING_PROFILES_ACTIVE=mysql
+      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/tiny_urldb?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+      - SPRING_DATASOURCE_USERNAME=tinyurl_user
+      - SPRING_DATASOUCE_PASSWORD=Yy123456.
 ```
 2.3.2 docker-compose启动  
 ```shell script

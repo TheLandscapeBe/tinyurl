@@ -1,11 +1,19 @@
 # MAINTAINER: errorfatal89@gmail.com
 version: '3'
+
+networks:
+  your-network-name:
+    driver: bridge
+
 services:
   tinyurl:
     image: fofcn/tinyurl:latest
     restart: always
     ports:
       - "53000:53000"
+    networks:
+      your-network-name:
+
     environment:
       - SERVER_PORT=53000
       - SPRING_PROFILES_ACTIVE=mysql
