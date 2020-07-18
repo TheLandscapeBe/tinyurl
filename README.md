@@ -48,6 +48,7 @@ CREATE TABLE `url` (
    ```shell script
     cd tinyurl
     mvn clean package -Dmaven.test.skip=true
+    java -jar -Xms128M -Xmx256M tinyurl.jar
    ```
   2. 编译docker镜像部署
     ```shell script
@@ -64,10 +65,30 @@ CREATE TABLE `url` (
      docker login 
      docker build -t tinyurl .
      docker tag tinyurl fofcn/tinyurl:v0.2.0
-     doker push fofcn/tinyurl
+     docker push fofcn/tinyurl
      ```
-  3. 直接使用docker镜像部署
-  在环境执行docker pull fofcn/tinyurl:${tag}
+  3. 使用docker镜像部署
+    3.1 编写docker-compose.yml 
+    ```yml
+        # MAINTAINER: errorfatal89@gmail.com
+        version: '3'
+        services:
+          tinyurl:
+            image: fofcn/tinyurl:v1.1.0
+            restart: always
+            ports:
+              - "53000:53000"
+            environment:
+              - SERVER_PORT=53000
+              - SPRING_PROFILES_ACTIVE=mysql
+              - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/tiny_urldb?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+              - SPRING_DATASOURCE_USERNAME=tinyurl_user
+              - SPRING_DATASOUCE_PASSWORD=Yy123456.
+    ```
+    3.2 docker-compose启动
+    ```shell
+        docker-compose up -d
+    ```
  # 接口列表
 1 生成短链接<br>
 2 打开短链接 <br>
