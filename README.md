@@ -86,6 +86,12 @@ services:
     restart: always
     ports:
       - "53000:53000"
+    
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - /app/applog/tinyurl:/app/applog/tinyurl
+
     networks:
       your-network-name:
         
