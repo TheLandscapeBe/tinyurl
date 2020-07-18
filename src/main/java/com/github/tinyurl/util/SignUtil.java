@@ -27,22 +27,9 @@ public class SignUtil {
      * @param key 签名密钥
      * @return 签名是否正确
      */
-    public static boolean check(HttpServletRequest request, String key) {
-        Enumeration<String> paramKeys = request.getParameterNames();
-        if (ObjectUtil.isNull(paramKeys)) {
-            return false;
-        }
+    public static boolean check(Map<String, String> paramMap, String key) {
 
-        Map<String, String> treeMap = new TreeMap<>();
-        while(paramKeys.hasMoreElements()) {
-            String paramKey = paramKeys.nextElement();
-            String value = request.getParameter(paramKey);
-            if (StringUtil.isEmpty(value)) {
-                continue;
-            }
-            treeMap.put(paramKey, value);
-        }
-
+        Map<String, String> treeMap = new TreeMap<>(paramMap);
         String requestSign = treeMap.remove(SIGN_KEY);
         String sign = sign(treeMap, key);
 

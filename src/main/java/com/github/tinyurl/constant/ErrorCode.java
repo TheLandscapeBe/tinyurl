@@ -9,6 +9,7 @@ package com.github.tinyurl.constant;
 public enum ErrorCode {
     SUCCESS(0, "成功"),
     SYSTEM_ERROR(1, "系统错误"),
+    BAD_PARAMETER(2, "参数错误（bad parameter）"),
     DOMAIN_NOT_EXISTS(100, "指定的域名不存在"),
     RECORD_NOT_EXISTS(101, "记录不存在"),
     TS_EXPIRED(102, "请求时间过长"),
