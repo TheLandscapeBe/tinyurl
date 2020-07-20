@@ -70,7 +70,7 @@ docker build -t tinyurl .
 docker tag tinyurl fofcn/tinyurl:v0.2.0
 docker push fofcn/tinyurl
  ```
-2.3 使用docker镜像部署  
+2.3 使用docker镜像部署  （目前docker镜像已经上传到doker hub,直接使用fofcn/tinyurl获取镜像即可）
 2.3.1 编写docker-compose.yml   
 ```yaml
 # MAINTAINER: errorfatal89@gmail.com
