@@ -1,5 +1,6 @@
 package com.github.tinyurl.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.github.tinyurl.config.TinyUrlConfig;
 import com.github.tinyurl.constant.Constants;
 import com.github.tinyurl.constant.ErrorCode;
@@ -17,6 +18,7 @@ import com.github.tinyurl.util.DateUtil;
 import com.github.tinyurl.util.Md5Util;
 import com.github.tinyurl.util.ObjectUtil;
 import com.github.tinyurl.util.StringUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,6 +32,7 @@ import java.util.Date;
  * @author errorfatal89@gmail.com
  * @date 2020/07/03
  */
+@Slf4j
 @Service
 public class TinyUrlServiceImpl implements TinyUrlService {
     private static final String ALPHABET = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -51,9 +54,11 @@ public class TinyUrlServiceImpl implements TinyUrlService {
     @Override
     @Transactional(rollbackFor = Throwable.class)
     public String shorten(ShortenRequest request) {
+        log.info("start shorten request, request param: [{}]", JSON.toJSONString(request));
         // 检查是否存在该domain
         Integer domainId = domainDao.selectByDomain(request.getDomain());
         if (domainId == null) {
+            log.error("can not found request domain, request domain: [{}]", request.getDomain());
             throw new TinyUrlException(ErrorCode.DOMAIN_NOT_EXISTS);
         }
 
@@ -78,7 +83,10 @@ public class TinyUrlServiceImpl implements TinyUrlService {
                 .append(request.getDomain())
                 .append(Constants.HTTP_SLASH)
                 .append(encode(uid));
-        return finalUrl.toString();
+
+        String shortenUrl = finalUrl.toString();
+        log.info("shorten done, short url: [{}]", shortenUrl);
+        return shortenUrl;
     }
 
     @Override

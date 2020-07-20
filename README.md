@@ -97,10 +97,10 @@ services:
         
     environment:
       - SERVER_PORT=53000
-      - SPRING_PROFILES_ACTIVE=mysql
-      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/tiny_urldb?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
-      - SPRING_DATASOURCE_USERNAME=tinyurl_user
-      - SPRING_DATASOUCE_PASSWORD=Yy123456.
+      - SPRING_PROFILES_ACTIVE=dev
+      - SPRING_SHARDINGSPHERE_DATASOURCE_URL=jdbc:mysql://localhost:3306/tiny_urldb?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+      - SPRING_SHARDINGSPHERE_DATASOURCE_USERNAME=tinyurl_user
+      - SPRING_SHARDINGSPHERE_DATASOUCE_PASSWORD=Yy123456.
 ```
 2.3.2 docker-compose启动  
 ```shell script

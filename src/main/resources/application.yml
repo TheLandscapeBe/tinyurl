@@ -1,6 +1,8 @@
 spring:
   profiles:
-    active: mysql
+    active: dev
+  application:
+    name: tinyurl
 
 server:
   port: 80
@@ -9,7 +11,6 @@ tinyurl:
   checkSign: true
   tsThresholdMillis: 300000
   uidGenType: snowflake
-
   snowflake:
     dataCenterId: 0
     workerId: 0

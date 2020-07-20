@@ -27,7 +27,7 @@
 	</parent>
 	<groupId>com.github</groupId>
 	<artifactId>tinyURL</artifactId>
-	<version>v1.1.0</version>
+	<version>v1.2.0</version>
 	<name>tinyURL</name>
 	<packaging>jar</packaging>
 	<description>tiny url generate</description>
@@ -81,6 +81,18 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-jdbc</artifactId>
+		</dependency>
+
+		<!-- sharding jdbc -->
+		<dependency>
+			<groupId>org.apache.shardingsphere</groupId>
+			<artifactId>sharding-jdbc-spring-boot-starter</artifactId>
+			<version>4.0.0-RC2</version>
+		</dependency>
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.1.21</version>
 		</dependency>
 
 		<dependency>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false" scanPeriod="60 seconds" debug="false">
+    <property name="LOG_HOME" value="/app/applog/tinyurl"/>
+    <property name="appName" value="tinyurl"></property>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%magenta(%d{yyyy-MM-dd HH:mm:ss.SSS}) %yellow([%thread]) %highlight(%-5level) %cyan(%logger{50}) - %green(%msg%n)</pattern>
+        </layout>
+    </appender>
+
+    <appender name="appLogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/${appName}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/${appName}-%d{yyyy-MM-dd}-%i.log</fileNamePattern>
+            <MaxHistory>60</MaxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>100MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%magenta(%d{yyyy-MM-dd HH:mm:ss.SSS})  %yellow([ %thread ]) - %highlight([ %-5level ]) %cyan([ %logger{50} : %line ]) - %green(%msg%n)</pattern>
+        </layout>
+    </appender>
+
+    <logger name="com.github.tinyurl" level="info"/>
+
+    <springProfile name="prod,test">
+        <root level="info">
+            <appender-ref ref="stdout"/>
+            <appender-ref ref="appLogAppender"/>
+        </root>
+    </springProfile>
+    <springProfile name="dev">
+        <root level="info">
+            <appender-ref ref="stdout"/>
+        </root>
+    </springProfile>
+</configuration>
