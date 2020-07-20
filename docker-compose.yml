@@ -24,9 +24,13 @@ services:
     environment:
       - SERVER_PORT=53000
       - SPRING_PROFILES_ACTIVE=dev
-      - SPRING_SHARDINGSPHERE_DATASOURCE_URL=jdbc:mysql://localhost:3306/tiny_urldb?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
-      - SPRING_SHARDINGSPHERE_DATASOURCE_USERNAME=tinyurl_user
-      - SPRING_SHARDINGSPHERE_DATASOURCE_PASSWORD=Yy123456.
+      - SPRING_SHARDINGSPHERE_DATASOURCE_MASTER_URL=jdbc:mysql://localhost:3306/tiny_urldb?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+      - SPRING_SHARDINGSPHERE_DATASOURCE_MASTER_USERNAME=tinyurl_user
+      - SPRING_SHARDINGSPHERE_DATASOURCE_MASTER_PASSWORD=Yy123456.
+      - SPRING_SHARDINGSPHERE_DATASOUCE_MASTER_PASSWORD=Yy123456.
+      - SPRING_SHARDINGSPHERE_DATASOURCE_SLAVE0_URL=jdbc:mysql://localhost:3306/tiny_urldb?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
+      - SPRING_SHARDINGSPHERE_DATASOURCE_SLAVE0_USERNAME=tinyurl_user
+      - SPRING_SHARDINGSPHERE_DATASOUCE_SLAVE0_PASSWORD=Yy123456.
 
 #  redis:
 #    image: redis:4
