@@ -11,7 +11,6 @@ import com.github.tinyurl.util.SignUtil;
 import com.github.tinyurl.util.StringUtil;
 import com.github.tinyurl.util.WebUtil;
 import org.apache.commons.io.IOUtils;
-import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 
@@ -43,7 +42,7 @@ import java.util.Map;
  * @date 2020/07/07
  */
 @Component
-@Order(1)
+
 public class SignFilter implements Filter {
 
     private static final int NONCE_STR_LENGTH_THRESHOLD = 16;
