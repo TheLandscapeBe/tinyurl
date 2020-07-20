@@ -27,7 +27,7 @@
 	</parent>
 	<groupId>com.github</groupId>
 	<artifactId>tinyURL</artifactId>
-	<version>v1.2.0</version>
+	<version>v1.2.0-SNAPSHOT</version>
 	<name>tinyURL</name>
 	<packaging>jar</packaging>
 	<description>tiny url generate</description>
