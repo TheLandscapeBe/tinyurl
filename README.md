@@ -82,7 +82,7 @@ networks:
 
 services:
   tinyurl:
-    image: fofcn/tinyurl:latest
+    image: fofcn/tinyurl:v1.2.0
     restart: always
     ports:
       - "53000:53000"
