@@ -104,6 +104,9 @@ services:
       - SPRING_SHARDINGSPHERE_DATASOURCE_SLAVE0_URL=jdbc:mysql://localhost:3306/tiny_urldb?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
       - SPRING_SHARDINGSPHERE_DATASOURCE_SLAVE0_USERNAME=tinyurl_user
       - SPRING_SHARDINGSPHERE_DATASOURCE_SLAVE0_PASSWORD=Yy123456.
+      # dataCenterId与WorkerId在多节点部署时必须制定且组合唯一
+      - TINYURL_SNOWFLAKE_DATACENTERID=0
+      - TINYURL_SNOWFLAKE_WORKERID=0
 ```
 2.3.2 docker-compose启动  
 ```shell script
