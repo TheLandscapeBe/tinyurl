@@ -107,6 +107,7 @@ services:
       # dataCenterId与WorkerId在多节点部署时必须制定且组合唯一
       - TINYURL_SNOWFLAKE_DATACENTERID=0
       - TINYURL_SNOWFLAKE_WORKERID=0
+      - TINYURL_HTTPSCHEME=https
 ```
 2.3.2 docker-compose启动  
 ```shell script

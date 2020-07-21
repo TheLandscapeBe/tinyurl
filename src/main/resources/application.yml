@@ -8,6 +8,7 @@ server:
   port: 80
 
 tinyurl:
+  httpScheme: https
   checkSign: true
   tsThresholdMillis: 300000
   uidGenType: snowflake

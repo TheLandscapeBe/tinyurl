@@ -29,4 +29,9 @@ public class TinyUrlConfig {
      * uid生成算法
      */
     private String uidGenType;
+
+    /**
+     * http或https协议定义
+     */
+    private String httpScheme;
 }

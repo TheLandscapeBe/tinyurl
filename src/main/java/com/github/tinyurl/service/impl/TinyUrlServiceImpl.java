@@ -79,7 +79,14 @@ public class TinyUrlServiceImpl implements TinyUrlService {
         }
 
         StringBuilder finalUrl = new StringBuilder();
-        finalUrl.append(Constants.HTTP_SCHEMA)
+
+        String httpScheme = Constants.HTTP_SCHEMA;
+        if (StringUtil.isNotEmpty(tinyUrlConfig.getHttpScheme())
+                && Constants.HTTPS_SCHEMA_STR.equalsIgnoreCase(tinyUrlConfig.getHttpScheme())) {
+            httpScheme = Constants.HTTPS_SCHEMA;
+        }
+
+        finalUrl.append(httpScheme)
                 .append(request.getDomain())
                 .append(Constants.HTTP_SLASH)
                 .append(encode(uid));
