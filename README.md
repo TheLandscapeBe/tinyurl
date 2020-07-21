@@ -82,6 +82,7 @@ networks:
 
 services:
   tinyurl:
+    container_name: tinyurl
     image: fofcn/tinyurl:v1.2.0
     restart: always
     ports:
