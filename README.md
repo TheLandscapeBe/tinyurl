@@ -98,7 +98,7 @@ services:
         
     environment:
       - SERVER_PORT=53000
-      # 目前支持dev:开发人员使用，test：测试人员使用，prod：生产环境使用
+      # 目前支持dev:开发人员使用，test：测试人员使用，prod：生产环境使用 
       - SPRING_PROFILES_ACTIVE=dev
       - SPRING_SHARDINGSPHERE_DATASOURCE_MASTER_URL=jdbc:mysql://localhost:3306/tiny_urldb?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8
       - SPRING_SHARDINGSPHERE_DATASOURCE_MASTER_USERNAME=tinyurl_user
