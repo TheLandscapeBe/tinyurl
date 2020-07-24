@@ -8,7 +8,7 @@ networks:
 services:
   tinyurl:
     container_name: tinyurl
-    image: fofcn/tinyurl:latest
+    image: fofcn/tinyurl:v1.3.0
     restart: always
     ports:
       - "53000:53000"
