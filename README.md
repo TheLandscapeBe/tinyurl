@@ -50,6 +50,7 @@ git clone https://github.com/fofcn/tinyurl.git
 ```shell script
 cd tinyurl
 mvn clean package -Dmaven.test.skip=true
+cd target
 java -jar -Xms128M -Xmx256M tinyurl.jar
 ```
 2. 编译docker镜像部署  
