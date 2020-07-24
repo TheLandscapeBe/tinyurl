@@ -108,7 +108,7 @@ services:
       - SPRING_SHARDINGSPHERE_DATASOURCE_SLAVE0_PASSWORD=Yy123456.
       
       # v1.3.0新增配置
-      # dataCenterId与WorkerId在多节点部署时必须制定且组合唯一
+      # dataCenterId与WorkerId在多节点部署时必须指定且组合唯一
       - TINYURL_SNOWFLAKE_DATACENTERID=0
       - TINYURL_SNOWFLAKE_WORKERID=0
       # 配置域名http或https
