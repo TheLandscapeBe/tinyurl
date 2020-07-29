@@ -25,7 +25,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @author errorfatal89@gmail.com
  * @date 2020/07/02
  */
-@Controller("/")
+@Controller
+@RequestMapping("/")
 public class TinyUrlController {
     @Resource
     private HttpServletRequest request;
